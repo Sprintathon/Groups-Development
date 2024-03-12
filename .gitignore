@@ -2,6 +2,14 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Groups/Server
-/Groups
+
 /.vs
+/Groups/.idea/.idea.Groups/.idea
+/Groups/.vs
+/Groups/App/bin/Debug
+/Groups/App/obj/Debug
+/Groups/Server/bin/Debug/net8.0
+/Groups/Server/obj
+/Groups/Shared/bin/Debug/net8.0
+/Groups/Shared/obj/Debug/net8.0
+/Groups/Shared/obj

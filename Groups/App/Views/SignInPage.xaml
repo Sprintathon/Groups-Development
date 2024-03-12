@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App.Views.SignInPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Shared.Models;assembly=Shared"
+    xmlns:viewmodel="clr-namespace:App.ViewModels"
+    Title="SignInPage">
+        <Grid Padding="0,40,0,0" RowDefinitions="*,2*">
+            <Image
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                Source="logo.png"
+                WidthRequest="100" />
+
+            <VerticalStackLayout
+                Grid.Row="1"
+                Padding="30"
+                Spacing="10"
+                VerticalOptions="Center">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Title"
+                    HorizontalOptions="Center"
+                    Text="Sign In"
+                    VerticalOptions="Center" />
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="email"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+            IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="Email address"
+                    Text="{Binding User.Email}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="password"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+            IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="Password"
+                    IsPassword="True"
+                    Text="{Binding User.Password}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+
+            <Button
+                    Background="Transparent"
+                    HorizontalOptions="End"
+                IsEnabled="{Binding IsNotBusy}"
+                    Text="forgotten password?"
+                    TextColor="Gray" />
+                <Button
+                    Background="{AppThemeBinding Light={StaticResource Primary},
+                                                 Dark={StaticResource PrimaryDark}}"
+                    Command="{Binding SignInAsyncCommand}"
+                    CornerRadius="20"
+                    Text="Sign in" />
+
+                <HorizontalStackLayout HorizontalOptions="Center">
+
+                    <Button
+                        Background="Transparent"
+                        CornerRadius="20" Padding="0"
+            IsEnabled="{Binding IsNotBusy}"
+                        Text="Don't have an account? "
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                    Dark='#80F5F5F5'}" />
+                    <Button
+                        Background="Transparent"
+                        Command="{Binding GoToSignUpAsyncCommand}"
+            IsEnabled="{Binding IsNotBusy}"
+                        CornerRadius="20" Padding="0"
+                        Text="Sign Up"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary},
+                                                    Dark={StaticResource Primary}}" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+
+</ContentPage>

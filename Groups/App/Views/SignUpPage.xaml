@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App.Views.SignUpPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Shared.Models;assembly=Shared"
+    xmlns:viewmodel="clr-namespace:App.ViewModels"
+    Title="SignUpPage">
+    <Grid RowDefinitions="*,2*">
+
+        <Image
+            Grid.Row="0"
+            HeightRequest="100"
+            HorizontalOptions="Center"
+            Source="logo"
+            VerticalOptions="Center" />
+
+        <VerticalStackLayout
+            Grid.Row="1"
+            Padding="30"
+            Spacing="10">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="Title"
+                HorizontalOptions="Center"
+                Text="Sign up"
+                VerticalOptions="Center" />
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="email"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="Email address"
+                    Text="{Binding User.Email}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="phone"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="Phone number"
+                    Text="{Binding User.PhoneNumber}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="names"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="First Name"
+                    Text="{Binding User.FirstName}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="names"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Placeholder="Last Name"
+                    Text="{Binding User.LastName}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+
+                </Grid.ColumnDefinitions>
+                <Image
+                    HeightRequest="25"
+                    HorizontalOptions="Start"
+                    Source="password"
+                    VerticalOptions="Center"
+                    WidthRequest="25" />
+                <Entry
+                    Grid.Column="1"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand"
+                    IsPassword="True"
+                    Placeholder="Password"
+                    Text="{Binding User.Password}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Button
+                Command="{Binding SignUpCommand}"
+                CornerRadius="20"
+                Text="Sign Up" />
+
+
+            <HorizontalStackLayout HorizontalOptions="Center">
+
+                <Button
+                    Padding="0"
+                    Background="Transparent"
+                    CornerRadius="20"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Text="Already have an account? "
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryDarkText},
+                                                Dark='#80F5F5F5'}" />
+                <Button
+                    Padding="0"
+                    Background="Transparent"
+                    Command="{Binding GoToSignInAsyncCommand}"
+                    CornerRadius="20"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Text="Sign in"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary},
+                                                Dark={StaticResource Primary}}" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

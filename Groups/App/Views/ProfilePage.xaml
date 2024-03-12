@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App.Views.ProfilePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:model="clr-namespace:Shared.Models;assembly=Shared"
+    xmlns:viewmodel="clr-namespace:App.ViewModels"
+    Title="ProfilePage">
+    <Grid Padding="20" RowDefinitions="Auto,*">
+        <Grid
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            ColumnDefinitions="Auto,Auto,*"
+            ColumnSpacing="10">
+            <ImageButton
+                Grid.Column="0"
+                HeightRequest="30"
+                Source="settings.png"
+                VerticalOptions="Center"
+                WidthRequest="30" />
+            <VerticalStackLayout Grid.Column="1">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    HorizontalTextAlignment="End"
+                    Text="Profile" />
+            </VerticalStackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Margin="0,20,0,0" Spacing="20">
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HorizontalTextAlignment="Start"
+                    Text="Profile" />
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <ImageButton
+                        Grid.Column="0"
+                        HeightRequest="30"
+                        Source="sound"
+            IsEnabled="{Binding IsNotBusy}"
+                        VerticalOptions="Center"
+                        WidthRequest="30" />
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="20"
+                            HorizontalTextAlignment="Start"
+                            Text="Notification" />
+                        <Label
+                            FontSize="15"
+                            HorizontalTextAlignment="Start"
+                            Text="Turn on notification for your schedules" />
+                    </VerticalStackLayout>
+                    <Switch
+                        Grid.Column="2"
+                        IsToggled="{Binding Notifications}"
+                        OnColor="Orange"
+            IsEnabled="{Binding IsNotBusy}"
+                        ThumbColor="Green">
+                        <Switch.Behaviors>
+                            <mct:EventToCommandBehavior Command="{Binding SwitchNotificationCommand}" EventName="Toggled" />
+                        </Switch.Behaviors>
+                    </Switch>
+                </Grid>
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="Fill"
+                    Color="Gray" />
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HorizontalTextAlignment="Start"
+                    Text="Basic Information" />
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        Source="email"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Entry
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="Email address"
+            IsEnabled="{Binding IsNotBusy}"
+                        Text="{Binding User.Email}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        Source="phone"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Entry
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+            IsEnabled="{Binding IsNotBusy}"
+                        Placeholder="Phone number"
+                        Text="{Binding User.PhoneNumber}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        Source="names"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Entry
+                        Grid.Column="1"
+            IsEnabled="{Binding IsNotBusy}"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="First Name"
+                        Text="{Binding User.FirstName}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        Source="names"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Entry
+                        Grid.Column="1"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+            IsEnabled="{Binding IsNotBusy}"
+                        Placeholder="Last Name"
+                        Text="{Binding User.LastName}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        HeightRequest="25"
+                        HorizontalOptions="Start"
+                        Source="password"
+                        VerticalOptions="Center"
+                        WidthRequest="25" />
+                    <Entry
+                        Grid.Column="1"
+                        HeightRequest="50"
+            IsEnabled="{Binding IsNotBusy}"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="Password"
+                        Text="{Binding User.Password}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Button Text="Update" />
+
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="Fill"
+                    Color="Gray" />
+
+
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="22"
+                    HorizontalTextAlignment="Start"
+                    Text="Your Groups" />
+                <VerticalStackLayout IsVisible="{Binding HasGroups}" Spacing="20">
+                    <CollectionView ItemsSource="{Binding User.Groups}">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Group">
+                                <Frame
+                                    Margin="0,5"
+                                    Padding="20"
+                                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary},
+                                                                      Dark={StaticResource PrimaryDark}}"
+                                    BorderColor="Transparent"
+                                    CornerRadius="30"
+                                    MinimumHeightRequest="100">
+                                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10">
+                                        <ImageButton
+                                            Grid.Column="0"
+                                            HeightRequest="40"
+                                            Source="logo.png"
+            IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GroupsViewModel}}, Path= IsNotBusy}"
+                                            VerticalOptions="Center"
+                                            WidthRequest="40" />
+                                        <VerticalStackLayout Grid.Column="1" Spacing="0">
+                                            <Grid Margin="0" ColumnDefinitions="*,Auto">
+
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Name}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+                                            </Grid>
+
+                                            <Grid Margin="0" ColumnDefinitions="*,Auto,Auto">
+                                                <ImageButton
+                                                    Grid.Column="1"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ProfileViewModel}}, Path=LeaveCommand}"
+                                                    CommandParameter="{Binding .}"
+            IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GroupsViewModel}}, Path=IsNotBusy}"
+                                                    HeightRequest="30"
+                                                    Source="logout"
+                                                    VerticalOptions="Center"
+                                                    WidthRequest="30" />
+                                                <Label
+                                                    FontAttributes="Bold"
+                                                    FontSize="11"
+                                                    HorizontalOptions="Start"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Description}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+                                            </Grid>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout IsVisible="{Binding HasNoGroups}" Spacing="20">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        HorizontalTextAlignment="Center"
+                        Text="You have not joined any groups" />
+                    <Button
+            IsEnabled="{Binding IsNotBusy}"
+                        Text="Find a Group" />
+                </VerticalStackLayout>
+
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="Fill"
+                    Color="Gray" />
+                <Button
+                    Command="{Binding SignOutAsyncCommand}"
+                    CornerRadius="20"
+            IsEnabled="{Binding IsNotBusy}"
+                    Text="Sign out" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

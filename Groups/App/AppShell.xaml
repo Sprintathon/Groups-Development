@@ -4,12 +4,36 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:App"
+    xmlns:views="clr-namespace:App.Views"
+    Title="App"
     Shell.FlyoutBehavior="Disabled"
-    Title="App">
+    Shell.NavBarIsVisible="False">
+    <TabBar Route="Tabs">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
+        </Tab>
+        <Tab Title="Schedule" Icon="calendar.png" Route="SchedulePage">
+            <ShellContent ContentTemplate="{DataTemplate views:SchedulePage}" />
+        </Tab>
+        <Tab Title="Groups" Icon="groups.png">
+            <ShellContent ContentTemplate="{DataTemplate views:GroupsPage}" />
+        </Tab>
+        <Tab Title="Profile" Icon="settings.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+        </Tab>
+    </TabBar>
+
 
     <ShellContent
-        Title="Home"
+        Title="profile"
+        ContentTemplate="{DataTemplate views:SignInPage}"
+        Icon="profile.png"
+        Route="SignInPage" />
+
+    <ShellContent
+        Title="profile"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Icon="profile.png"
+        Route="MainPage3" />
 
 </Shell>

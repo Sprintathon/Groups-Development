@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:Shared.Models;assembly=Shared"
+    xmlns:viewmodel="clr-namespace:App.ViewModels"
+    Title="HomePage"
+    Shell.NavBarIsVisible="False">
+    <Grid
+        ColumnDefinitions="*,*"
+        RowDefinitions="Auto,*"
+        RowSpacing="0">
+        <Grid
+            Grid.ColumnSpan="2"
+            Padding="20"
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="10">
+
+            <VerticalStackLayout Grid.Column="1">
+                <Label
+                    FontSize="12"
+                    HorizontalTextAlignment="End"
+                    Text="Good Morning" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding User.Name}" />
+            </VerticalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout>
+                <Grid
+                    Padding="20,0,20,50"
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="Auto, Auto,Auto,6*"
+                    RowSpacing="20">
+
+                    <Frame
+                        Grid.Row="1"
+                        Grid.RowSpan="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BackgroundColor="#8079443E"
+                        BorderColor="Transparent"
+                        CornerRadius="30">
+
+                        <VerticalStackLayout Grid.Column="1">
+                            <Label
+                                FontSize="12"
+                                HorizontalTextAlignment="Start"
+                                Text="Welcome back" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                HorizontalTextAlignment="Start"
+                                Text="You are moving through your days" />
+
+                            <ProgressBar Progress="{Binding PercentageCompletion}" ProgressColor="Orange" />
+                            <Label
+                                FontSize="12"
+                                HorizontalTextAlignment="End"
+                                Text="{Binding NextEvent.GroupEvent.Name}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Label
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        HorizontalOptions="Start"
+                        Text="Today's Schedule"
+                        VerticalOptions="Start" />
+                    <Grid
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="20"
+                        RowDefinitions="*, *, *"
+                        RowSpacing="20">
+                        <Frame
+                            Grid.Row="0"
+                            Grid.RowSpan="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="1"
+                            BackgroundColor="#206C6C6C"
+                            BorderColor="Transparent"
+                            CornerRadius="30"
+                            IsVisible="{Binding HasFirst}">
+
+                            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding FirstEvent.GroupEvent.Name}"
+                                    VerticalTextAlignment="Center" />
+                                <Label
+                                    FontSize="10"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding FirstEvent.StartAndEndTime}"
+                                    VerticalTextAlignment="Center" />
+
+                                <Frame
+                                    Padding="10,5"
+                                    BackgroundColor="#80e5e5e5"
+                                    BorderColor="Transparent"
+                                    CornerRadius="100"
+                                    HorizontalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="10"
+                                        Text="{Binding FirstEvent.GroupEvent.Group.Name}" />
+                                </Frame>
+                            </VerticalStackLayout>
+                        </Frame>
+                        <Frame
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="1"
+                            Padding="0"
+                            BackgroundColor="#30F5949E"
+                            BorderColor="Transparent"
+                            CornerRadius="30"
+                            IsVisible="{Binding HasSecond}">
+                            <Grid ColumnDefinitions="*" RowDefinitions="*,*,*">
+
+                                <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding SecondEvent.GroupEvent.Name}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding SecondEvent.StartAndEndTime}"
+                                        VerticalTextAlignment="Center" />
+                                    <Frame
+                                        Padding="10,5"
+                                        BackgroundColor="#80e5e5e5"
+                                        BorderColor="Transparent"
+                                        CornerRadius="100"
+                                        HorizontalOptions="Center">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="10"
+                                            Text="{Binding SecondEvent.GroupEvent.Group.Name}" />
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <Image
+                                    Grid.Row="1"
+                                    Grid.RowSpan="2"
+                                    Margin="0"
+                                    HorizontalOptions="End"
+                                    Source="inclass"
+                                    VerticalOptions="End" />
+                            </Grid>
+
+                        </Frame>
+                        <Frame
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="1"
+                            Padding="0"
+                            BackgroundColor="#1074423C"
+                            BorderColor="Transparent"
+                            CornerRadius="30"
+                            IsVisible="{Binding HasThird}">
+                            <Grid ColumnDefinitions="*" RowDefinitions="*,*,*">
+
+                                <VerticalStackLayout Spacing="5" VerticalOptions="Center">
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="15"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding ThirdEvent.GroupEvent.Name}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding ThirdEvent.StartAndEndTime}"
+                                        VerticalTextAlignment="Center" />
+
+                                    <Frame
+                                        Padding="10,5"
+                                        BackgroundColor="#80e5e5e5"
+                                        BorderColor="Transparent"
+                                        CornerRadius="100"
+                                        HorizontalOptions="Center">
+                                        <Label
+                                            FontAttributes="Bold"
+                                            FontSize="10"
+                                            Text="{Binding ThirdEvent.GroupEvent.Group.Name}" />
+                                    </Frame>
+                                </VerticalStackLayout>
+                                <Image
+                                    Grid.Row="1"
+                                    Grid.RowSpan="2"
+                                    Margin="0"
+                                    HorizontalOptions="End"
+                                    Source="study"
+                                    VerticalOptions="End" />
+                            </Grid>
+                        </Frame>
+
+                        <Frame
+                            Grid.Row="3"
+                            Grid.RowSpan="1"
+                            Grid.Column="1 "
+                            Grid.ColumnSpan="1"
+                            BackgroundColor="#80000000"
+                            BorderColor="Transparent"
+                            CornerRadius="30"
+                            IsVisible="{Binding HasMore}">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SetNotificationCommand}" />
+                            </Frame.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Label
+                                    FontAttributes="Bold"
+                                    FontSize="15"
+                                    HorizontalOptions="Center"
+                                    Text="View More"
+                                    VerticalTextAlignment="Center" />
+                                <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Center"
+                                        Text="+"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Center"
+                                        Text="{Binding HowManyMore}"
+                                        VerticalTextAlignment="Center" />
+                                    <Label
+                                        FontSize="10"
+                                        HorizontalOptions="Center"
+                                        Text=" Schedule"
+                                        VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

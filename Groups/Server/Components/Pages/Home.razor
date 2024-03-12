@@ -1,7 +1,336 @@
 ﻿@page "/"
-
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+<a href="swagger">Want swagger instead?</a>
+<button class="btn btn-primary" @onclick="Init">Init</button>
+
+@* add forms to add new entities with selects and inputes  *@
+<h1>@loading</h1>
+<div class="row row-cols-3">
+    <div class="col">
+
+        <h2>Groups</h2>
+        <EditForm Model="newGroup" OnValidSubmit="AddGroup">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group">
+                <label for="name">Name</label>
+                <InputText id="name" class="form-control" @bind-Value="newGroup.Name" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <InputText id="description" class="form-control" @bind-Value="newGroup.Description" />
+            </div>
+            <div class="form-group">
+                <label for="avatarUrl">Group Type</label>
+                <InputSelect id="avatarUrl" class="form-control" @bind-Value="newGroup.GroupTypeId">
+                    <option value="0">Select</option>
+                    @foreach (var type in groupTypes)
+                    {
+                        <option value="@type.Id">@type.Name</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="form-group">
+                <label for="avatarUrl">Group Color</label>
+                <InputSelect id="avatarUrl" class="form-control" @bind-Value="newGroup.ColorId">
+                    <option value="0">Select</option>
+                    @foreach (var color in colors)
+                    {
+                        <option value="@color.Id">@color.Name</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Group</button>
+        </EditForm>
+
+    </div>
+    <div class="col">
+
+        <h2>Event Schedules</h2>
+        <EditForm Model="@newSchedule" OnValidSubmit="@AddSchedule">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="startDateTime">Start Date Time</label>
+                <input type="time" id="startDateTime" class="form-control" @bind="newSchedule.StartDateTime" />
+            </div>
+            <div class="form-group">
+                <label for="endDateTime">End Date Time</label>
+                <input type="time" id="startDateTime" class="form-control" @bind="newSchedule.EndDateTime" />
+            </div>
+
+            <div class="form-group">
+                <label for="venueId">Day</label>
+                <InputSelect id="venueId" class="form-control" @bind-Value="newSchedule.DayOfWeek">
+                    <option value="0">Sunday</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                </InputSelect>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <InputText id="description" class="form-control" @bind-Value="newSchedule.Description" />
+            </div>
+            <div class="form-group">
+                <label for="venueId">Venue</label>
+                <InputSelect id="venueId" class="form-control" @bind-Value="newSchedule.VenueId">
+                    @foreach (var venue in venues)
+                    {
+                        <option value="@venue.Id">@venue.Name</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <div class="form-group">
+                <label for="groupId">Group</label>
+                <InputSelect id="groupId" class="form-control" @bind-Value="newSchedule.GroupEventId">
+                    @foreach (var groupEvent in events)
+                    {
+                        <option value="@groupEvent.Id">@groupEvent.Name</option>
+                    }
+                </InputSelect>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Add Schedule</button>
+        </EditForm>
+
+    </div>
+    <div class="col">
+
+        <h2>Group Events</h2>
+        <EditForm Model="@newEvent" OnValidSubmit="@AddEvent">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <InputText id="name" class="form-control" @bind-Value="newEvent.Name" />
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <InputText id="description" class="form-control" @bind-Value="newEvent.Description" />
+            </div>
+            <div class="form-group">
+                <label for="avatarUrl">Avatar Url</label>
+                <InputText id="avatarUrl" class="form-control" @bind-Value="newEvent.AvatarUrl" />
+            </div>
+            <div class="form-group">
+                <label for="groupId">Group</label>
+                <InputSelect id="groupId" class="form-control" @bind-Value="newEvent.GroupId">
+                    @foreach (var group in groups)
+                    {
+                        <option value="@group.Id">@group.Name</option>
+                    }
+                </InputSelect>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Event</button>
+        </EditForm>
+    </div>
+    <div class="col">
+
+        <h2>Venues</h2>
+        <EditForm Model="@newVenue" OnValidSubmit="@AddVenue">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <InputText id="name" class="form-control" @bind-Value="newVenue.Name" />
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <InputText id="address" class="form-control" @bind-Value="newVenue.Address" />
+            </div>
+            <div class="form-group">
+                <label for="city">AvatarUrl</label>
+                <InputText id="AvatarUrl" class="form-control" @bind-Value="newVenue.AvatarUrl" />
+            </div>
+            <button type="submit" class="btn btn-primary">Add Venue</button>
+        </EditForm>
+
+    </div>
+
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">
+
+        <h2>Groups</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var group in groups)
+                {
+                    <tr>
+                        <td>@group.Name</td>
+                        <td>@group.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col">
+
+        <h2>Event Schedules</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var schedule in schedules)
+                {
+                    <tr>
+                        <td>@schedule.EndDateTime</td>
+                        <td>Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col">
+
+        <h2>Group Events</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var groupEvent in events)
+                {
+                    <tr>
+                        <td>@groupEvent.Name</td>
+                        <td>@groupEvent.Description</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col">
+
+        <h2>Venues</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venue in venues)
+                {
+                    <tr>
+                        <td>@venue.Name</td>
+                        @* <td>@venue.Description</td> *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col"></div>
+</div>
+
+
+
+
+
+@code {
+    string loading = "Loading...";
+    List<Color> colors = new();
+    List<GroupType> groupTypes = new();
+    Group newGroup = new Group();
+    List<Group>
+    groups = new List<Group>();
+
+    EventSchedule newSchedule = new EventSchedule();
+    List<EventSchedule>
+        schedules = new List<EventSchedule>
+            ();
+
+    GroupEvent newEvent = new GroupEvent();
+    List<GroupEvent>
+        events = new List<GroupEvent>
+            ();
+
+    Venue newVenue = new Venue();
+    List<Venue>
+        venues = new List<Venue>
+            ();
+
+    HttpClient Http { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Http = new HttpClient();
+        Http.BaseAddress = new("https://sprintathon.zambezidigital.com");
+        Init();
+
+    }
+    async Task Init()
+    {
+        loading = "Loading...XX";
+        StateHasChanged();
+        venues = await Http.GetFromJsonAsync<List<Venue>>("api/Venue");
+        colors = await Http.GetFromJsonAsync<List<Color>>("api/Color");
+        groupTypes = await Http.GetFromJsonAsync<List<GroupType>>("api/GroupType");
+        groups = await Http.GetFromJsonAsync<List<Group>>("api/Group");
+        schedules = await Http.GetFromJsonAsync<List<EventSchedule>>("api/EventSchedule");
+        events = await Http.GetFromJsonAsync<List<GroupEvent>>("api/GroupEvent");
+        loading = "Loading...Complete";
+        StateHasChanged();
+    }
+    async Task AddGroup()
+    {
+        await Http.PostAsJsonAsync("api/Group", newGroup);
+        groups = await Http.GetFromJsonAsync<List<Group>>("api/Group");
+        newGroup = new Group();
+    }
+
+    async Task AddSchedule()
+    {
+        await Http.PostAsJsonAsync("api/EventSchedule", newSchedule);
+        schedules = await Http.GetFromJsonAsync<List<EventSchedule>>("api/EventSchedule");
+        newSchedule = new EventSchedule();
+    }
+
+    async Task AddEvent()
+    {
+        await Http.PostAsJsonAsync("api/GroupEvent", newEvent);
+        events = await Http.GetFromJsonAsync<List<GroupEvent>>("api/GroupEvent");
+        newEvent = new GroupEvent();
+    }
+
+    async Task AddVenue()
+    {
+        await Http.PostAsJsonAsync("api/Venue", newVenue);
+        venues = await Http.GetFromJsonAsync<List<Venue>>("api/Venue");
+        newVenue = new Venue();
+    }
+}

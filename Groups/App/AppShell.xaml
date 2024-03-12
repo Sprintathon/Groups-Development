@@ -4,15 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:App"
-    xmlns:views="clr-namespace:App.Views"
-    Title="App"
     Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False">
-
+    Title="App">
 
     <ShellContent
-        Title="profile"
+        Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Icon="profile.png"
-        Route="MainPage3" />
+        Route="MainPage" />
+
 </Shell>

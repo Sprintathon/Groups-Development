@@ -16,7 +16,7 @@
 		<OutputType>Exe</OutputType>
 		<RootNamespace>App</RootNamespace>
 		<UseMaui>true</UseMaui>
-		<SingleProject>true</SingleProject>4
+		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
